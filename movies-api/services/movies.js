@@ -15,7 +15,7 @@ class MoviesService {
     const createMovieId = await Promise.resolve(moviesMock[0].id)
     return createMovieId
   }
-  
+
   async updateMovie() {
     const updatedMovieId = await Promise.resolve(moviesMock[0].id)
     return updatedMovieId

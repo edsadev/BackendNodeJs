@@ -1,4 +1,4 @@
-const express = require ('express')
+const express = require('express')
 const MoviesService = require('../services/movies')
 
 function moviesApi(app) {
@@ -7,7 +7,7 @@ function moviesApi(app) {
 
   const moviesService = new MoviesService
 
-  router.get('/', async function(req, res, next) {
+  router.get('/', async function (req, res, next) {
     const { tags } = req.query
     try {
       const movies = await moviesService.getMovies({ tags })
@@ -22,14 +22,14 @@ function moviesApi(app) {
   })
 
   // Read
-  router.get('/:movieId', async function(req, res, next) {
+  router.get('/:movieId', async function (req, res, next) {
     const { movieId } = req.params
     try {
       const movies = await moviesService.getMovie({ movieId })
 
       res.status(200).json({
         data: movies,
-        message: 'Movies retrieved'
+        message: 'Movie retrieved'
       })
     } catch (err) {
       next(err)
@@ -37,7 +37,8 @@ function moviesApi(app) {
   })
 
   // Create
-  router.post('/', async function(req, res, next) {
+  router.post('/', async function (req, res, next) {
+    // movie es un alias
     const { body: movie } = req
     try {
       const createMovieId = await moviesService.createMovie({ movie })
@@ -50,9 +51,8 @@ function moviesApi(app) {
       next(err)
     }
   })
-
   // Update
-  router.put('/:movieId', async function(req, res, next) {
+  router.put('/:movieId', async function (req, res, next) {
     const { movieId } = req.params
     const { body: movie } = req
 
@@ -67,9 +67,9 @@ function moviesApi(app) {
       next(err)
     }
   })
-  
+
   // Delete
-  router.delete('/:movieId', async function(req, res, next) {
+  router.delete('/:movieId', async function (req, res, next) {
     const { movieId } = req.params
 
     try {
@@ -83,7 +83,7 @@ function moviesApi(app) {
       next(err)
     }
   })
-  
+
 }
 
 module.exports = moviesApi
